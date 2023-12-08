@@ -1,38 +1,27 @@
-<form action="/add_user" method="post">
-  <label for="browser_username">Username</label>
-  <input id="browser_username" type="text" name="input_username" placeholder="Enter a username...">
+<h1>List of users</h1>
 
-  <button>Add user</button>
+<form action="/add_user" method="post">
+<label for="browser_username">Username</label>
+<input id="browser_username" type="text" name="input_username" placeholder="Enter a username...">
+<button type="submit">Add user</button>
 </form>
+
+
 <hr>
 
 <table border="1">
   <tr>
-    <th>
-      ID
-    </th>
-
-    <th>
-      Username
-    </th>
-
-    <td>
-    </td>
+    <th>ID</th>
+    <th>Username</th>
+    <th></th>
   </tr>
+  <% @all_users.each do |user| %>
     <tr>
-      <% @all_users.each do |user|%>
+      <td><%= user.id %></td>
+      <td><%= user.username %></td>
       <td>
-        <%= user.id %>
-      </td>
-
-      <td>
-        <%= user.username%>
-      </td>
-
-      <td>
-        <a href="/users/<%= user.username %>">
-          Show details
-        </a>
+        <a href="/users/<%= user.username %>">Show details</a>
       </td>
     </tr>
+  <% end %>
 </table>
