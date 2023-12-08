@@ -1,0 +1,71 @@
+<h1>desmond</h1>
+
+<dl>
+  <dt>
+    ID
+  </dt>
+  <dd>
+    @the_user.id
+  </dd>
+
+  <dt>
+    Edit user
+  </dt>
+  <dd>
+    <form action="/update_user/<%= @the_user.id %>" method="post">
+      <label for="browser_username">Username</label>
+      <input id="browser_username" type="text" name="input_username" value=<%= @the_user.username%>>
+
+      <button>Update user</button>
+    </form>
+  </dd>
+</dl>
+
+<% the_photos = Photo.where({:owner_id => @the_user.id})%>
+<h2>Own photos (<%= the_photos.count%>)</h2>
+
+<table border="1">
+  <tr>
+    <th>
+      Image
+    </th>
+
+    <th>
+      Owner
+    </th>
+
+    <th>
+      Caption
+    </th>
+
+    <th>
+      Posted
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+    <%@the_photos.each do |a_photo|%>
+    <tr>
+      <td>
+        <img src=<%= a_photo.image%>>
+      </td>
+      <td>
+        <%= @the_user.username%>
+      </td>
+
+      <td>
+        <%= a_photo.caption%>
+      </td>
+
+      <td>
+        <%= a_photo.created_at%> # note "created_at" is something i found from the github solutions as it did not show up in the ERD
+      </td>
+
+      <td>
+        <a href="/photos/<%= a_photo.id%>">
+          Show details
+        </a>
+      </td>
+    </tr>
